@@ -15,13 +15,13 @@ services:
     image: oryd/hydra:${HYDRA_VERSION}
     environment:
         - DATABASE_URL
-    command: migrate sql $DATABASE_URL
+    command: ["migrate", "sql", "$DATABASE_URL"]
 
   hydra-host:
     image: oryd/hydra:${HYDRA_VERSION}
     ports:
-      - 9000:4444
-      - 9001:4445
+      - ${PUBLIC_PORT}:4444
+      - ${ADMIN_PORT}:4445
     environment:
       - SYSTEM_SECRET
       - DATABASE_URL
@@ -34,12 +34,12 @@ services:
     depends_on:
       - hydra-migrate-database
     restart: on-failure
-    command: serve all ${SERVE_PARAMS}
+    command: ["serve", "all", "${SERVE_PARAMS}"]
 
 volumes:
   data-hydra:
 
-networks:
-  default:
-    external:
-      name: schulcloudserver_schulcloud-server-network
+# networks:
+  # default:
+    # external:
+      # name: schulcloudserver_schulcloud-server-network
