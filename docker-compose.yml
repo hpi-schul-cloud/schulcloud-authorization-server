@@ -10,6 +10,10 @@ services:
       - POSTGRES_DB
     volumes:
       - data-hydra:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
 
   hydra-migrate-database:
     image: oryd/hydra:${HYDRA_VERSION}
@@ -35,6 +39,10 @@ services:
       - hydra-migrate-database
     restart: on-failure
     command: ["serve", "all", "${SERVE_PARAMS}"]
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
 
 volumes:
   data-hydra:
