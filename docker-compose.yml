@@ -2,19 +2,6 @@ version: '3'
 
 services:
 
-  hydra-postgres:
-    image: postgres:9.6
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-    volumes:
-      - data-hydra:/var/lib/postgresql/data
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-
   hydra-migrate-database:
     image: oryd/hydra:${HYDRA_VERSION}
     environment:
@@ -39,15 +26,12 @@ services:
       - hydra-migrate-database
     restart: on-failure
     command: ["serve", "all", "${SERVE_PARAMS}"]
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
+    # deploy:
+      # replicas: 1
+      # restart_policy:
+        # condition: any
 
-volumes:
-  data-hydra:
-
-# networks:
-  # default:
-    # external:
-      # name: schulcloudserver_schulcloud-server-network
+networks:
+  default:
+    external:
+      name: schulcloudserver_schulcloud-server-network
