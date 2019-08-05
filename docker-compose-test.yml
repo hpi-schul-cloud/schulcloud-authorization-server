@@ -19,6 +19,7 @@ services:
     command: ["migrate", "sql", "--yes", "$DSN"]
 
   hydra-host:
+    container_name: hydra-host
     image: oryd/hydra:${HYDRA_VERSION}
     ports:
       - ${PUBLIC_PORT}:4444
