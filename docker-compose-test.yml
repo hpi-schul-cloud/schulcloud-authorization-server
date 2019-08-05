@@ -26,7 +26,7 @@ services:
     environment:
       - SECRETS_SYSTEM
       - DSN
-      - URLS_SELF_ISSUER
+      - URLS_SELF_ISSUER=https://localhost:9000
       - URLS_LOGIN=${SC_FRONTEND}/oauth2/login
       - URLS_CONSENT=${SC_FRONTEND}/oauth2/consent
       - TLS_ALLOW_TERMINATION_FROM
