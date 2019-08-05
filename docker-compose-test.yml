@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_DB
     ports:
-      - 5432:5432
+      - 5432:5433
     volumes:
       - data-hydra:/var/lib/postgresql/data
     restart: on-failure
@@ -43,8 +43,3 @@ services:
 
 volumes:
   data-hydra:
-
-# networks:
-  # default:
-    # external:
-      # name: schulcloudserver_schulcloud-server-network
